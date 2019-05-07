@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Chat</title>
+    <link rel="stylesheet" href="./styles.min.css" />
+  </head>
+  <body>
+    <div class="chat">
+      <div id="sidebar" class="chat__sidebar"></div>
+      <div class="chat__main">
+        <div id="messages" class="chat__messages"></div>
+
+        <div class="compose">
+          <form id="msgform">
+            <input
+              type="text"
+              name="inputId"
+              id="inputId"
+              required
+              autocomplete="off"
+            />
+            <button id="sendId">Send</button>
+          </form>
+          <button id="sendLocation">Send location</button>
+        </div>
+      </div>
+    </div>
+    <script id="messageTemp" type="text/html">
+      <div class="message">
+        <p><span class="message_name">{{username}}</span></p>
+          <p>{{message}} <small class="message_metha">{{createdAt}}</small></p>
+      </div>
+    </script>
+    <script id="locationTemp" type="text/html">
+      <div class="message">
+          <p><span class="message_name">{{username}}</span></p>
+            <p><a href={{location}} target="_blank">My location</a> <small class="message_metha">{{createdAt}}</small></p>
+
+        </div>
+    </script>
+
+    <script id="infoTemp" type="text/html">
+      <h2 class="room-title">{{ room }}</h2>
+      <h3 class="list-title">Users</h3>
+      <ul class="users">
+        {{#users}}
+        <li>{{ username }}</li>
+        {{/users}}
+      </ul>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <!-- u htmlu mora da se uveze socket.io skripta koja dolazi sa instalacijom socketa -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- uvezemo i main js skriptu -->
+    <script src="./js/main.js"></script>
+  </body>
+</html>
