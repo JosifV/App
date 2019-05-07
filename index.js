@@ -22,7 +22,7 @@ const {
   getUsersInRoom
 } = require("./utils/users");
 
-const publicDirPath = path.join(__dirname, "../public");
+const publicDirPath = path.join(__dirname, "./public");
 app.use(express.static(publicDirPath));
 
 // io sada slusa evente, i u slucaju da se desi event connection (tj da se poveze), izvrsice ovu callback funkciju
