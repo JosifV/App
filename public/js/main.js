@@ -1,5 +1,3 @@
-// sve sto ti treba u ovoj skripti da bi se klijent konektovao na socket io jeste sledecje :)
-// sad postoji socket i na serveru i na klijentu
 const socket = io();
 
 const msgform = document.getElementById("msgform");
@@ -23,7 +21,7 @@ const autoScroll = () => {
   // visible heigth
   const visHeight = messages.offsetHeight;
 
-  // height of containing div
+  // heigth of containing div
   const divHeigth = messages.scrollHeight;
 
   // how far we scroled?
@@ -34,7 +32,6 @@ const autoScroll = () => {
   }
 };
 
-// parsiranje urla da se izvuce username i room name, drugi arg sluzi da se ukloni znak pitanja sa pocetka prve varijable
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true
 });
@@ -44,7 +41,6 @@ msgform.addEventListener("submit", e => {
   sendId.setAttribute("disabled", "disabled"); // disable form
   const message = e.target.inputId.value;
 
-  // emit() ima okvirno tri args, prvi je ime eventa, drugi je payload (ovde mozemo staviti i vise varijabli, i treci je callback function za event acknowledgement, tj za potvrdu da je event stigao tamo gde smo ga emitovali)... tu mozemo dodati args conformation koji ce sadrzati potvrdu pristiglu sa servera
   socket.emit("newMessage", message, conformation => {
     sendId.removeAttribute("disabled"); // enable form
     inputId.value = "";
@@ -63,11 +59,6 @@ socket.on("locationMsg", locationMessage => {
   messages.insertAdjacentHTML("beforeend", mapHtml);
   autoScroll();
   console.log(locationMessage);
-});
-// ovako primamo event koji nam je poslat
-// kao arg u callback funkcijji primimo varijablu koju nam je server poslao
-socket.on("countUpdated", count => {
-  console.log("Count has been updated", count);
 });
 
 socket.on("printMsg", message => {
